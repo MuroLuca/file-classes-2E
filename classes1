@@ -1,0 +1,29 @@
+clear()
+drawStage(ColorMaker.yellow)
+
+class BouncingRect(x: Int, y: Int) {
+val pic = Picture.rectangle(25, 25)
+pic.setFillColor(green)
+pic.setPosition(x, y)
+var vel = Vector2D(5, 25)
+val gravity = Vector2D(0, -0.2)
+
+def draw() {
+pic.draw()
+}
+
+def step() {
+vel = vel + gravity
+pic.translate(vel)
+if (pic.collidesWith(stageBorder)) {
+vel = bouncePicVectorOffStage(pic, vel)
+}
+}
+}
+
+val br = new BouncingRect(-75, -75)
+br.draw()
+
+animate {
+br.step()
+}
